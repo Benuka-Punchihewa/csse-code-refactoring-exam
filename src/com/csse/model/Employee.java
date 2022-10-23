@@ -1,5 +1,7 @@
 package com.csse.model;
 
+import com.csse.common.CommonConstants;
+
 public class Employee {
 
 	public String employeeID;
@@ -60,8 +62,8 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee ID = " + employeeID + "\n" + "FullName = " + fullName + "\n" + "Address = " + address + "\n"
-				+ "Faculty Name = " + facultyName + "\n" + "Department = " + department + "\n" + "Designation = "
-				+ designation;
+		return CommonConstants.EMPLOYEE_ID +" = "+ employeeID + "\n" + CommonConstants.EMPLOYEE_FULLNAME +" = "+ fullName + "\n" + CommonConstants.EMPLOYEE_ADDRESS +" = "+ address + "\n"
+				+ CommonConstants.EMPLOYEE_FACULTY_NAME +" = "+ facultyName + "\n" + CommonConstants.EMPLOYEE_DEPARTMENT +" = "+ department + "\n" + CommonConstants.EMPLOYEE_DESIGNATION
+				+" = "+ designation;
 	}
 }

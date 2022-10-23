@@ -6,8 +6,8 @@ import com.csse.model.Employee;
 
 public class displayUtil {
 	public static void displayEmployee(ArrayList<Employee> employees) {
-		System.out.println("Employee ID" + "\t\t" + "Full Name" + "\t\t" + "Address" + "\t\t" + "Faculty Name" + "\t\t"
-				+ "Department" + "\t\t" + "Designation" + "\n");
+		System.out.println(CommonConstants.EMPLOYEE_ID + "\t\t" + CommonConstants.EMPLOYEE_FULLNAME + "\t\t" + CommonConstants.EMPLOYEE_ADDRESS + "\t\t" + CommonConstants.EMPLOYEE_FACULTY_NAME + "\t\t"
+				+ CommonConstants.EMPLOYEE_DEPARTMENT + "\t\t" + CommonConstants.EMPLOYEE_DESIGNATION + "\n");
 		System.out
 				.println("================================================================================================================");
 		

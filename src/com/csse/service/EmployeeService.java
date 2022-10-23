@@ -17,12 +17,12 @@ public class EmployeeService extends EmployeeServiceTemplate {
 
 			for (Map<String, String> xmlPath : xmlPaths) {
 				Employee EMPLOYEE = new Employee();
-				EMPLOYEE.setEmployeeID(xmlPath.get("XpathEmployeeIDKey"));
-				EMPLOYEE.setFullName(xmlPath.get("XpathEmployeeNameKey"));
-				EMPLOYEE.setAddress(xmlPath.get("XpathEmployeeAddressKey"));
-				EMPLOYEE.setFacultyName(xmlPath.get("XpathFacultyNameKey"));
-				EMPLOYEE.setDepartment(xmlPath.get("XpathDepartmentKey"));
-				EMPLOYEE.setDesignation(xmlPath.get("XpathDesignationKey"));
+				EMPLOYEE.setEmployeeID(xmlPath.get(CommonConstants.EMPLOYEE_ID_PROPERTY_KEY));
+				EMPLOYEE.setFullName(xmlPath.get(CommonConstants.EMPLOYEE_FULLNAME_PROPERTY_KEY));
+				EMPLOYEE.setAddress(xmlPath.get(CommonConstants.EMPLOYEE_ADDRESS_PROPERTY_KEY));
+				EMPLOYEE.setFacultyName(xmlPath.get(CommonConstants.EMPLOYEE_FACULTYNAME_PROPERTY_KEY));
+				EMPLOYEE.setDepartment(xmlPath.get(CommonConstants.EMPLOYEE_DEPARTMENT_PROPERTY_KEY));
+				EMPLOYEE.setDesignation(xmlPath.get(CommonConstants.EMPLOYEE_DESIGNATION_PROPERTY_KEY));
 				
 				employeeList.add(EMPLOYEE);
 			}
@@ -35,8 +35,8 @@ public class EmployeeService extends EmployeeServiceTemplate {
 	public void createNewTable() {
 		try {
 			Statement statement = connection.createStatement();
-			statement.executeUpdate(QueryUtil.getQueryByID("q2"));
-			statement.executeUpdate(QueryUtil.getQueryByID("q1"));
+			statement.executeUpdate(QueryUtil.getQueryByID(CommonConstants.QUERY_DROP_TABLE));
+			statement.executeUpdate(QueryUtil.getQueryByID(CommonConstants.QUERY_CREATE_TABLE));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,7 +45,7 @@ public class EmployeeService extends EmployeeServiceTemplate {
 	@Override
 	public void insertEmployeesToDB() {
 		try {
-			preparedStatement = connection.prepareStatement(QueryUtil.getQueryByID("q3"));
+			preparedStatement = connection.prepareStatement(QueryUtil.getQueryByID(CommonConstants.QUERY_INSERT_EMPLOYEE));
 			connection.setAutoCommit(false);
 			
 			for (Employee employee : employeeList) {
@@ -69,7 +69,7 @@ public class EmployeeService extends EmployeeServiceTemplate {
 	public void readEmployeesFromDB() {
 		ArrayList<Employee> employees = new ArrayList<Employee>();
 		try {
-			preparedStatement = connection.prepareStatement(QueryUtil.getQueryByID("q5"));
+			preparedStatement = connection.prepareStatement(QueryUtil.getQueryByID(CommonConstants.QUERY_SELECT_ALLEMPLOYEE));
 			ResultSet results = preparedStatement.executeQuery();
 			
 			while (results.next()) {

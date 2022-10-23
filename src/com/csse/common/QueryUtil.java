@@ -21,11 +21,11 @@ public class QueryUtil extends Property{
 		try {
 
 			nodeList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-					.parse(new File(properties.getProperty("queryXMLFilePath"))).getElementsByTagName("query");
+					.parse(new File(properties.getProperty(CommonConstants.QUERY_XML_FILE_PATH_PROPERTY_KEY))).getElementsByTagName(CommonConstants.QUERY_TAGNAME);
 
 			for (int x = 0; x < nodeList.getLength(); x++) {
 				element = (Element) nodeList.item(x);
-				if (element.getAttribute("id").equals(id))
+				if (element.getAttribute(CommonConstants.QUERY_ID).equals(id))
 					break;
 			}
 

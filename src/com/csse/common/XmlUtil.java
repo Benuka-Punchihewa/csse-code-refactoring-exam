@@ -32,9 +32,9 @@ public class XmlUtil extends Property {
 
 	public static void requestTransform() throws Exception {
 
-		Source requestXMLSource = new StreamSource(new File(properties.getProperty("requestXMLFilePath")));
-		Source modifiedXSLSource = new StreamSource(new File(properties.getProperty("modifiedXSLFilePath")));
-		Result responseXMLSource = new StreamResult(new File(properties.getProperty("responseXMLFilePath")));
+		Source requestXMLSource = new StreamSource(new File(properties.getProperty(CommonConstants.REQUESTXML_FILE_PATH)));
+		Source modifiedXSLSource = new StreamSource(new File(properties.getProperty(CommonConstants.MODIFIEDXML_FILE_PATH)));
+		Result responseXMLSource = new StreamResult(new File(properties.getProperty(CommonConstants.RESPONSEXML_FILE_PATH)));
 		TransformerFactory.newInstance().newTransformer(modifiedXSLSource).transform(requestXMLSource,
 				responseXMLSource);
 	}
@@ -43,38 +43,38 @@ public class XmlUtil extends Property {
 		try {
 
 			Document responseDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-					.parse(properties.getProperty("responseXMLFilePath"));
+					.parse(properties.getProperty(CommonConstants.RESPONSEXML_FILE_PATH));
 			XPath xPath = XPathFactory.newInstance().newXPath();
-			int resultCount = Integer.parseInt((String) xPath.compile(properties.getProperty("employeeXPath"))
+			int resultCount = Integer.parseInt((String) xPath.compile(properties.getProperty(CommonConstants.EMPLOYEE_XML_FILE_PATH))
 					.evaluate(responseDocument, XPathConstants.STRING));
 
 			for (int i = 1; i <= resultCount; i++) {
 				xmlPath = new HashMap<String, String>();
-				xmlPath.put("XpathEmployeeIDKey",
+				xmlPath.put(CommonConstants.EMPLOYEE_ID_PROPERTY_KEY,
 						(String) xPath
-								.compile(MessageFormat.format((String) properties.getProperty("employeeIDXPath"), i))
+								.compile(MessageFormat.format((String) properties.getProperty(CommonConstants.EMPLOYEE_ID_FILE_PATH), i))
 								.evaluate(responseDocument, XPathConstants.STRING));
 
-				xmlPath.put("XpathEmployeeNameKey",
+				xmlPath.put(CommonConstants.EMPLOYEE_FULLNAME_PROPERTY_KEY,
 						(String) xPath.compile(
-								MessageFormat.format((String) properties.getProperty("employeeFullNameXPath"), i))
+								MessageFormat.format((String) properties.getProperty(CommonConstants.EMPLOYEE_FULLNAME_FILE_PATH), i))
 								.evaluate(responseDocument, XPathConstants.STRING));
 
-				xmlPath.put("XpathEmployeeAddressKey",
+				xmlPath.put(CommonConstants.EMPLOYEE_ADDRESS_PROPERTY_KEY,
 						(String) xPath.compile(
-								MessageFormat.format((String) properties.getProperty("employeeAddressXPath"), i))
+								MessageFormat.format((String) properties.getProperty(CommonConstants.EMPLOYEE_ADDRESS_FILE_PATH), i))
 								.evaluate(responseDocument, XPathConstants.STRING));
 
-				xmlPath.put("XpathFacultyNameKey", (String) xPath
-						.compile(MessageFormat.format((String) properties.getProperty("employeeFacultyNameXPath"), i))
+				xmlPath.put(CommonConstants.EMPLOYEE_FACULTYNAME_PROPERTY_KEY, (String) xPath
+						.compile(MessageFormat.format((String) properties.getProperty(CommonConstants.EMPLOYEE_FACULTYNAME_FILE_PATH), i))
 						.evaluate(responseDocument, XPathConstants.STRING));
 
-				xmlPath.put("XpathDepartmentKey", (String) xPath
-						.compile(MessageFormat.format((String) properties.getProperty("employeeDepartmentXPath"), i))
+				xmlPath.put(CommonConstants.EMPLOYEE_DEPARTMENT_PROPERTY_KEY, (String) xPath
+						.compile(MessageFormat.format((String) properties.getProperty(CommonConstants.EMPLOYEE_DEPARTMENT_FILE_PATH), i))
 						.evaluate(responseDocument, XPathConstants.STRING));
 
-				xmlPath.put("XpathDesignationKey", (String) xPath
-						.compile(MessageFormat.format((String) properties.getProperty("employeeDesignationXPath"), i))
+				xmlPath.put(CommonConstants.EMPLOYEE_DESIGNATION_PROPERTY_KEY, (String) xPath
+						.compile(MessageFormat.format((String) properties.getProperty(CommonConstants.EMPLOYEE_DESIGNATION_FILE_PATH), i))
 						.evaluate(responseDocument, XPathConstants.STRING));
 
 				xmlPaths.add(xmlPath);

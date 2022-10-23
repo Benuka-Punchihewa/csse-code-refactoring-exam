@@ -9,8 +9,7 @@ public class Property {
 
 	static {
 		try {
-			InputStream input = new FileInputStream(
-					"src/com/csse/config/config.properties");
+			InputStream input = new FileInputStream(CommonConstants.PROPERTIES_FILE_PATH);
 			properties.load(input);
 		} catch (Exception e) {
 			e.printStackTrace();
