@@ -39,7 +39,7 @@ public class XmlUtil extends Property {
 					responseXMLSource);
 		} catch (TransformerConfigurationException e) {
 			e.printStackTrace();
-		}catch (TransformerException e) {
+		} catch (TransformerException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
