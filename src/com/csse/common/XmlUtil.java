@@ -30,13 +30,20 @@ public class XmlUtil extends Property {
 
 	private static Map<String, String> xmlPath = null;
 
-	public static void requestTransform() throws Exception {
-
-		Source requestXMLSource = new StreamSource(new File(properties.getProperty("requestXMLFilePath")));
-		Source modifiedXSLSource = new StreamSource(new File(properties.getProperty("modifiedXSLFilePath")));
-		Result responseXMLSource = new StreamResult(new File(properties.getProperty("responseXMLFilePath")));
-		TransformerFactory.newInstance().newTransformer(modifiedXSLSource).transform(requestXMLSource,
-				responseXMLSource);
+	public static void requestTransform() {
+		try {
+			Source requestXMLSource = new StreamSource(new File(properties.getProperty("requestXMLFilePath")));
+			Source modifiedXSLSource = new StreamSource(new File(properties.getProperty("modifiedXSLFilePath")));
+			Result responseXMLSource = new StreamResult(new File(properties.getProperty("responseXMLFilePath")));
+			TransformerFactory.newInstance().newTransformer(modifiedXSLSource).transform(requestXMLSource,
+					responseXMLSource);
+		} catch (TransformerConfigurationException e) {
+			e.printStackTrace();
+		}catch (TransformerException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static ArrayList<Map<String, String>> getXmlPaths() {
@@ -79,6 +86,10 @@ public class XmlUtil extends Property {
 
 				xmlPaths.add(xmlPath);
 			}
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
