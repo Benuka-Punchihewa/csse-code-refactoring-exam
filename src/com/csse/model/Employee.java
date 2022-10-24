@@ -2,6 +2,10 @@ package com.csse.model;
 
 import com.csse.common.CommonConstants;
 
+/**
+ * Employee model class
+ *
+ */
 public class Employee {
 
 	public String employeeID;
@@ -10,11 +14,11 @@ public class Employee {
 	public String facultyName;
 	public String department;
 	public String designation;
-	
+
 	public void setEmployeeID(String employeeID) {
 		this.employeeID = employeeID;
 	}
-	
+
 	public String getEmployeeID() {
 		return employeeID;
 	}
@@ -59,11 +63,12 @@ public class Employee {
 		this.designation = designation;
 	}
 
-
 	@Override
 	public String toString() {
-		return CommonConstants.EMPLOYEE_ID +" = "+ employeeID + "\n" + CommonConstants.EMPLOYEE_FULLNAME +" = "+ fullName + "\n" + CommonConstants.EMPLOYEE_ADDRESS +" = "+ address + "\n"
-				+ CommonConstants.EMPLOYEE_FACULTY_NAME +" = "+ facultyName + "\n" + CommonConstants.EMPLOYEE_DEPARTMENT +" = "+ department + "\n" + CommonConstants.EMPLOYEE_DESIGNATION
-				+" = "+ designation;
+		return CommonConstants.EMPLOYEE_ID + " = " + employeeID + "\n" + CommonConstants.EMPLOYEE_FULLNAME + " = "
+				+ fullName + "\n" + CommonConstants.EMPLOYEE_ADDRESS + " = " + address + "\n"
+				+ CommonConstants.EMPLOYEE_FACULTY_NAME + " = " + facultyName + "\n"
+				+ CommonConstants.EMPLOYEE_DEPARTMENT + " = " + department + "\n" + CommonConstants.EMPLOYEE_DESIGNATION
+				+ " = " + designation;
 	}
 }

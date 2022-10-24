@@ -5,12 +5,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
-
 import com.csse.model.Employee;
 import com.csse.common.*;
 
-public class EmployeeService extends EmployeeServiceTemplate {
 
+/**
+ * Implementation is template class
+ * uses template method design pattern
+ *
+ */
+public class EmployeeService extends EmployeeServiceTemplate {
+	/**
+	 * Implementation of abstract method to read employees from xml and add to
+	 * arraylist.
+	 */
 	@Override
 	public void addEmployeesToEmployeeList() {
 		try {
@@ -24,14 +32,18 @@ public class EmployeeService extends EmployeeServiceTemplate {
 				EMPLOYEE.setFacultyName(xmlPath.get(CommonConstants.EMPLOYEE_FACULTYNAME_PROPERTY_KEY));
 				EMPLOYEE.setDepartment(xmlPath.get(CommonConstants.EMPLOYEE_DEPARTMENT_PROPERTY_KEY));
 				EMPLOYEE.setDesignation(xmlPath.get(CommonConstants.EMPLOYEE_DESIGNATION_PROPERTY_KEY));
-				
+
 				employeeList.add(EMPLOYEE);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.log(CommonConstants.HIGH_SEVERITY, e.getMessage());
 		}
 	}
 
+	/**
+	 * Implementation of abstract method to clean existing table if exists and
+	 * create a new table.
+	 */
 	@Override
 	public void createNewTable() {
 		try {
@@ -39,16 +51,20 @@ public class EmployeeService extends EmployeeServiceTemplate {
 			statement.executeUpdate(QueryUtil.getQueryByID(CommonConstants.QUERY_DROP_TABLE));
 			statement.executeUpdate(QueryUtil.getQueryByID(CommonConstants.QUERY_CREATE_TABLE));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Logger.log(CommonConstants.HIGH_SEVERITY, e.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.log(CommonConstants.HIGH_SEVERITY, e.getMessage());
 		}
 	}
 
+	/**
+	 * Implementation of abstract method to insert employees to database
+	 */
 	@Override
 	public void insertEmployeesToDB() {
 		try {
-			preparedStatement = connection.prepareStatement(QueryUtil.getQueryByID(CommonConstants.QUERY_INSERT_EMPLOYEE));
+			preparedStatement = connection
+					.prepareStatement(QueryUtil.getQueryByID(CommonConstants.QUERY_INSERT_EMPLOYEE));
 			connection.setAutoCommit(false);
 
 			for (Employee employee : employeeList) {
@@ -64,17 +80,23 @@ public class EmployeeService extends EmployeeServiceTemplate {
 			preparedStatement.executeBatch();
 			connection.commit();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Logger.log(CommonConstants.HIGH_SEVERITY, e.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.log(CommonConstants.HIGH_SEVERITY, e.getMessage());
 		}
 	}
 
+	/**
+	 * Implementation of abstract method to read employees from database and
+	 * call displayEmployee method by passing Employee arraylist to display
+	 * details
+	 */
 	@Override
 	public void readEmployeesFromDB() {
 		ArrayList<Employee> employees = new ArrayList<Employee>();
 		try {
-			preparedStatement = connection.prepareStatement(QueryUtil.getQueryByID(CommonConstants.QUERY_SELECT_ALLEMPLOYEE));
+			preparedStatement = connection
+					.prepareStatement(QueryUtil.getQueryByID(CommonConstants.QUERY_SELECT_ALLEMPLOYEE));
 			ResultSet results = preparedStatement.executeQuery();
 
 			while (results.next()) {
@@ -90,9 +112,9 @@ public class EmployeeService extends EmployeeServiceTemplate {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Logger.log(CommonConstants.HIGH_SEVERITY, e.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.log(CommonConstants.HIGH_SEVERITY, e.getMessage());
 		}
 
 		displayUtil.displayEmployee(employees);

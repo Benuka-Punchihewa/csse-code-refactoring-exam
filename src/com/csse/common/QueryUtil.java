@@ -1,27 +1,27 @@
 package com.csse.common;
 
-import javax.xml.transform.TransformerFactoryConfigurationError;
-import javax.xml.transform.TransformerException;
 import java.io.File;
-import org.xml.sax.SAXException;
-import java.io.IOException;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.NodeList;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
-import javax.xml.transform.TransformerConfigurationException;
 
 public class QueryUtil extends Property {
 
+	/**
+	 * finds returns query by reading query xml by query id
+	 * 
+	 * @param id
+	 * @return query string
+	 */
 	public static String getQueryByID(String id) {
 		NodeList nodeList;
 		Element element = null;
 		try {
 
 			nodeList = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-					.parse(new File(properties.getProperty(CommonConstants.QUERY_XML_FILE_PATH_PROPERTY_KEY))).getElementsByTagName(CommonConstants.QUERY_TAGNAME);
+					.parse(new File(properties.getProperty(CommonConstants.QUERY_XML_FILE_PATH_PROPERTY_KEY)))
+					.getElementsByTagName(CommonConstants.QUERY_TAGNAME);
 
 			for (int x = 0; x < nodeList.getLength(); x++) {
 				element = (Element) nodeList.item(x);
@@ -30,9 +30,9 @@ public class QueryUtil extends Property {
 			}
 
 		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
+			Logger.log(CommonConstants.HIGH_SEVERITY, e.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.log(CommonConstants.HIGH_SEVERITY, e.getMessage());
 		}
 		return element.getTextContent().trim();
 	}
