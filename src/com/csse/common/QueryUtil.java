@@ -13,7 +13,7 @@ import org.w3c.dom.Node;
 
 import javax.xml.transform.TransformerConfigurationException;
 
-public class QueryUtil extends Property{
+public class QueryUtil extends Property {
 
 	public static String getQueryByID(String id) {
 		NodeList nodeList;
@@ -29,6 +29,8 @@ public class QueryUtil extends Property{
 					break;
 			}
 
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
